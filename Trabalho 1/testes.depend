@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1653595762 source:d:\ufu\2021-2(2022)\ia\testes\testes\main.c
+	<stdio.h>
+	<stdlib.h>
+	"lista_encadeada.h"
+	"heuristicas.h"
+
+1653590841 source:d:\ufu\2021-2(2022)\ia\testes\testes\lista_encadeada.c
+	<stdio.h>
+	<stdlib.h>
+	"lista_encadeada.h"
+
+1653590364 d:\ufu\2021-2(2022)\ia\testes\testes\lista_encadeada.h
+
+1653590364 d:\ufu\2021-2(2022)\ia\testes\testes\auxfuncs.h
+
+1653590364 d:\ufu\2021-2(2022)\ia\testes\testes\aux_functions.h
+
+1653595404 d:\ufu\2021-2(2022)\ia\testes\testes\heuristicas.h
+	"lista_encadeada.h"
+
+1653596081 source:d:\ufu\2021-2(2022)\ia\testes\testes\heuristicas.c
+	<stdio.h>
+	<stdlib.h>
+	"heuristicas.h"
+	"lista_encadeada.h"
+
