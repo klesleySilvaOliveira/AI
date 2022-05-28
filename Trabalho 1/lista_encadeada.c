@@ -1,7 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+#ifndef LISTA_ENCADEADA_H_INCLUDED
+#define LISTA_ENCADEADA_H_INCLUDED
+
 #include "lista_encadeada.h"
 
+#endif // LISTA_ENCADEADA_H_INCLUDED
+
+#ifndef HEURISTICAS_H_INCLUDED
+#define HEURISTICAS_H_INCLUDED
+
+#include "heuristicas.h"
+
+#endif // HEURISTICAS_H_INCLUDED
+
+#ifndef FUNCOES_AUX_INCLUDED
+#define FUNCOES_AUX_INCLUDED
+
+#include "funcoes_aux.h"
+
+#endif // FUNCOES_AUX_INCLUDED
 
 typedef struct list_node List_node;
 typedef struct list List;
@@ -11,7 +30,7 @@ struct list{
 };
 
 struct list_node{
-    struct game data;
+    Game data;
     List_node *next;
 };
 
@@ -26,25 +45,6 @@ List* list_create(){
 
     return li;
 }
-
-/*int list_print(List *li){
-    List_node *a = li->head;
-    int i;
-    if(li == NULL){
-        return OUT_OF_MEMORY;
-    }
-    if(li->head == NULL){
-        return ELEM_NOT_FOUND;
-    }
-    while(a != NULL){
-        printf("\nMatricula aluno: %d\nNome aluno: %s\nNotas aluno:\n", a->data.matricula, a->data.nome);
-        for(i = 0; i < 3; i++){
-            printf("- Nota %d: %.2lf\n", i + 1, a->data.n[i]);
-        }
-        a = a->next;
-    }
-    return SUCCESS;
-}*/
 
 int list_free(List *li){
     List_node *aux, *aux2;
@@ -61,7 +61,7 @@ int list_free(List *li){
     return SUCCESS;
 }
 
-int list_push_front(List *li, struct game game){
+int list_push_front(List *li, Game game){
     List_node *a;
     if(li == NULL){
         return OUT_OF_MEMORY;
@@ -109,7 +109,7 @@ int list_pop_front(List *li){
     return SUCCESS;
 }
 
-int list_front(List *li, struct game *game){
+int list_front(List *li, Game *game){
     if(li == NULL){
         return OUT_OF_MEMORY;
     }
@@ -120,7 +120,7 @@ int list_front(List *li, struct game *game){
     return SUCCESS;
 }
 
-int list_insert_sorted(List *li, struct game game){
+int list_insert_sorted(List *li, Game game){
     List_node *aux, *a;
     int back;
     if(li == NULL){
@@ -128,7 +128,7 @@ int list_insert_sorted(List *li, struct game game){
     }
     back = list_size(li);
     aux = li->head;
-    if(back == 0 || game.h < aux->data.h){
+    if(back == 0 || (game.h + game.g) < (aux->data.h + aux->data.g)){
         list_push_front(li, game);
         return SUCCESS;
     }
@@ -140,11 +140,11 @@ int list_insert_sorted(List *li, struct game game){
     a->data = game;
 
     while(aux != NULL){
-        if(game.h > aux->data.h && aux->next == NULL){
+        if((game.h + game.g) > (aux->data.h + aux->data.g) && aux->next == NULL){
             aux->next = a;
             a->next = NULL;
             return SUCCESS;
-        }else if(game.h > aux->data.h && game.h < aux->next->data.h){
+        }else if((game.h + game.g) > (aux->data.h + aux->data.g) && (game.h + game.g) < (aux->next->data.h + aux->next->data.g)){
             a->next = aux->next;
             aux->next = a;
             return SUCCESS;
@@ -152,4 +152,52 @@ int list_insert_sorted(List *li, struct game game){
         aux = aux->next;
     }
     return SUCCESS;
+}
+
+int list_find(List *li, Game game){
+   List_node *aux;
+   if(li == NULL){
+        return OUT_OF_MEMORY;
+    }
+   if(li->head == NULL){
+        return 0;
+    }
+   aux = li->head;
+   while(aux->next != NULL){
+        if((game.h + game.g) < (aux->next->data.h + aux->next->data.g)){
+            return 0;
+        }
+        if(compara_matriz(aux->data, game)){                        /*funcao compara matriz aqui*/
+            return 1;
+        }
+        else{
+            aux = aux->next;
+        }
+
+   }
+   if(compara_matriz(aux->data, game)){                        /*funcao compara matriz aqui*/
+            return 1;
+    }
+   return 0;
+}
+
+int transfer_list(List *origem, List *destino){
+    int teste;
+   List_node *aux;
+   if(origem == NULL){
+        return OUT_OF_MEMORY;
+    }
+    if(destino == NULL){
+        return OUT_OF_MEMORY;
+    }
+   if(origem->head == NULL){
+        return INVALID_NULL_POINTER;
+    }
+    if(destino->head == NULL){
+        return INVALID_NULL_POINTER;
+    }
+   aux = origem->head;
+   origem->head = origem->head->next;
+   teste = list_insert_sorted(destino, aux->data);
+   return teste;
 }

@@ -1,12 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "heuristicas.h"
+
 #ifndef LISTA_ENCADEADA_H_INCLUDED
 #define LISTA_ENCADEADA_H_INCLUDED
 
 #include "lista_encadeada.h"
 
 #endif // LISTA_ENCADEADA_H_INCLUDED
+
+#ifndef HEURISTICAS_H_INCLUDED
+#define HEURISTICAS_H_INCLUDED
+
+#include "heuristicas.h"
+
+#endif // HEURISTICAS_H_INCLUDED
+
+#ifndef FUNCOES_AUX_INCLUDED
+#define FUNCOES_AUX_INCLUDED
+
+#include "funcoes_aux.h"
+
+#endif // FUNCOES_AUX_INCLUDED
 
 int basica(Game *game, Game objetivo){
     int i, j, aux=0;
@@ -47,16 +61,10 @@ int manhattan(Game *game, Game objetivo){
     return 0;
 }
 
-int maior(int num1, int num2){
-    int diferenca, maior, menor;
-    if(num1 > num2){
-        maior = num1;
-        menor = num2;
-    }
-    else{
-        maior = num2;
-        menor = num1;
-    }
-    diferenca = maior - menor;
-    return diferenca;
+int get_g(Game *game){
+    return game->g;
+}
+
+void set_g(Game *game, int g){
+    game->g = g;
 }

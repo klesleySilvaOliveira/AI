@@ -31,6 +31,14 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="A_star.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="A_star.h" />
+		<Unit filename="funcoes_aux.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="funcoes_aux.h" />
 		<Unit filename="heuristicas.c">
 			<Option compilerVar="CC" />
 		</Unit>

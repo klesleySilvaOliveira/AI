@@ -13,8 +13,10 @@ typedef struct game Game;
 
 List* list_create();
 int list_free(List *li);
-int list_push_front(List *li, struct game game);
-int list_insert_sorted(List *li, struct game game);
+int list_push_front(List *li, Game game);
+int list_insert_sorted(List *li, Game game);
 int list_size(List *li);
 int list_pop_front(List *li);
-int list_front(List *li, struct game *game);
+int list_front(List *li, Game *game);
+int list_find(List *li, Game game);
+int transfer_list(List *origem, List *destino);

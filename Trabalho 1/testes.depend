@@ -25,3 +25,47 @@
 	"heuristicas.h"
 	"lista_encadeada.h"
 
+1653689492 source:d:\ufu\2021-2(2022)\ia\testes\trabalho 1\heuristicas.c
+	<stdio.h>
+	<stdlib.h>
+	"lista_encadeada.h"
+	"heuristicas.h"
+	"funcoes_aux.h"
+
+1653689468 d:\ufu\2021-2(2022)\ia\testes\trabalho 1\heuristicas.h
+
+1653687457 d:\ufu\2021-2(2022)\ia\testes\trabalho 1\lista_encadeada.h
+
+1653694557 source:d:\ufu\2021-2(2022)\ia\testes\trabalho 1\lista_encadeada.c
+	<stdio.h>
+	<stdlib.h>
+	"lista_encadeada.h"
+	"heuristicas.h"
+	"funcoes_aux.h"
+
+1653695078 source:d:\ufu\2021-2(2022)\ia\testes\trabalho 1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"lista_encadeada.h"
+	"heuristicas.h"
+	"funcoes_aux.h"
+	"A_star.h"
+
+1653609808 source:d:\ufu\2021-2(2022)\ia\testes\trabalho 1\funcoes_aux.c
+	<stdio.h>
+	<stdlib.h>
+	"lista_encadeada.h"
+	"funcoes_aux.h"
+
+1653609747 d:\ufu\2021-2(2022)\ia\testes\trabalho 1\funcoes_aux.h
+
+1653695335 source:d:\ufu\2021-2(2022)\ia\testes\trabalho 1\a_star.c
+	<stdio.h>
+	<stdlib.h>
+	"lista_encadeada.h"
+	"heuristicas.h"
+	"funcoes_aux.h"
+	"A_star.h"
+
+1653688459 d:\ufu\2021-2(2022)\ia\testes\trabalho 1\a_star.h
+
