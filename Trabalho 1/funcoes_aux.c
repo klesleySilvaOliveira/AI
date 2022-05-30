@@ -81,3 +81,15 @@ int arround(Game game, int *top, int *right, int *down, int *left){
     }
     return 1;       //success
 }
+
+int get_g(Game *game){
+    return game->g;
+}
+
+void set_g(Game *game, int g){
+    game->g = g;
+}
+
+int get_h(Game *game){
+    return game->h;
+}

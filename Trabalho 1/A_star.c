@@ -42,13 +42,13 @@ int a_star(Game origem, Game destino, int tipo_heuristica){
     open = list_create();
     closed = list_create();
 
-    if(tipo_heuristica == 0){
-        set_g(&origem, 0);
-        teste = basica(&origem, destino);
-    }
-    else if(tipo_heuristica == 1){
+    if(tipo_heuristica){
         set_g(&origem, 0);
         teste = manhattan(&origem, destino);
+    }
+    else{
+        set_g(&origem, 0);
+        teste = basica(&origem, destino);
     }
 
     teste = list_insert_sorted(open, origem);
@@ -65,7 +65,7 @@ int a_star(Game origem, Game destino, int tipo_heuristica){
             printf("\nNao apagou\n");
         }
         if(compara_matriz(game1, destino)){
-            printf("\nSolucao encontrada!");
+            printf("\nG: %d - H: %d", get_g(&game1), get_h(&game1));
             list_free(open);
             list_free(closed);
             return SUCCESS;
@@ -77,6 +77,7 @@ int a_star(Game origem, Game destino, int tipo_heuristica){
                 teste = arround(game1, &top, &right, &down, &left);
 
                 if(top){
+                    printf("\ntop\n");
                     game2 = game1;
                     teste = find_pos(game2, 0, &i, &j);
                     if(!teste){
@@ -87,17 +88,17 @@ int a_star(Game origem, Game destino, int tipo_heuristica){
                     game2.matriz[i - 1][j] = 0;
                     aux = get_g(&game2);
                     set_g(&game2, ++aux);
-
-                    if(tipo_heuristica == 0){
-                        teste = basica(&game2, destino);
-                    }
-                    else if(tipo_heuristica == 1){
+                    if(tipo_heuristica){
                         teste = manhattan(&game2, destino);
+                    }
+                    else{
+                        teste = basica(&game2, destino);
                     }
                     teste = list_insert_sorted(open, game2);
                 }
 
                 if(right){
+                    printf("\nright\n");
                     game2 = game1;
                     teste = find_pos(game2, 0, &i, &j);
                     if(!teste){
@@ -108,17 +109,17 @@ int a_star(Game origem, Game destino, int tipo_heuristica){
                     game2.matriz[i][j+1] = 0;
                     aux = get_g(&game2);
                     set_g(&game2, ++aux);
-
-                    if(tipo_heuristica == 0){
-                        teste = basica(&game2, destino);
-                    }
-                    else if(tipo_heuristica == 1){
+                    if(tipo_heuristica){
                         teste = manhattan(&game2, destino);
+                    }
+                    else{
+                        teste = basica(&game2, destino);
                     }
                     teste = list_insert_sorted(open, game2);
                 }
 
                 if(down){
+                    printf("\ndown\n");
                     game2 = game1;
                     teste = find_pos(game2, 0, &i, &j);
                     if(!teste){
@@ -129,17 +130,17 @@ int a_star(Game origem, Game destino, int tipo_heuristica){
                     game2.matriz[i+1][j] = 0;
                     aux = get_g(&game2);
                     set_g(&game2, ++aux);
-
-                    if(tipo_heuristica == 0){
-                        teste = basica(&game2, destino);
-                    }
-                    else if(tipo_heuristica == 1){
+                    if(tipo_heuristica){
                         teste = manhattan(&game2, destino);
+                    }
+                    else{
+                        teste = basica(&game2, destino);
                     }
                     teste = list_insert_sorted(open, game2);
                 }
 
                 if(left){
+                    printf("\nleft\n");
                     game2 = game1;
                     teste = find_pos(game2, 0, &i, &j);
                     if(!teste){
@@ -150,12 +151,11 @@ int a_star(Game origem, Game destino, int tipo_heuristica){
                     game2.matriz[i][j-1] = 0;
                     aux = get_g(&game2);
                     set_g(&game2, ++aux);
-
-                    if(tipo_heuristica == 0){
-                        teste = basica(&game2, destino);
-                    }
-                    else if(tipo_heuristica == 1){
+                    if(tipo_heuristica){
                         teste = manhattan(&game2, destino);
+                    }
+                    else{
+                        teste = basica(&game2, destino);
                     }
                     teste = list_insert_sorted(open, game2);
                 }
@@ -163,7 +163,7 @@ int a_star(Game origem, Game destino, int tipo_heuristica){
         }
 
 
-        printf("\n\n tamanho: %d", list_size(open));
+        printf("\n\n tamanho: %d                                   tamanho: %d", list_size(open), list_size(closed));
         printf("\nt = %d - r = %d - d = %d - l = %d", top, right, down, left);
     }
 

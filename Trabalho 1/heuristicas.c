@@ -60,11 +60,3 @@ int manhattan(Game *game, Game objetivo){
 	(*game).h=aux;
     return 0;
 }
-
-int get_g(Game *game){
-    return game->g;
-}
-
-void set_g(Game *game, int g){
-    game->g = g;
-}

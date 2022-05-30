@@ -140,11 +140,11 @@ int list_insert_sorted(List *li, Game game){
     a->data = game;
 
     while(aux != NULL){
-        if((game.h + game.g) > (aux->data.h + aux->data.g) && aux->next == NULL){
+        if((game.h + game.g) >= (aux->data.h + aux->data.g) && aux->next == NULL){
             aux->next = a;
             a->next = NULL;
             return SUCCESS;
-        }else if((game.h + game.g) > (aux->data.h + aux->data.g) && (game.h + game.g) < (aux->next->data.h + aux->next->data.g)){
+        }else if((game.h + game.g) >= (aux->data.h + aux->data.g) && (game.h + game.g) < (aux->next->data.h + aux->next->data.g)){
             a->next = aux->next;
             aux->next = a;
             return SUCCESS;
