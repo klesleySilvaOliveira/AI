@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #ifndef LISTA_ENCADEADA_H_INCLUDED
 #define LISTA_ENCADEADA_H_INCLUDED
@@ -91,4 +92,53 @@ void set_g(Game *game, int g){
 
 int get_h(Game *game){
     return game->h;
+}
+
+void set_char(Game *game, char c){
+    game->pai[game->g] = c;
+}
+
+char get_char(Game *game, int pos){
+    return game->pai[pos];
+}
+
+void print_matrix(Game game){
+    int i, j;
+    printf("\n");
+    for(i = 0; i < 3; i++){
+        for(j = 0; j < 3; j++){
+            if(j == 0){
+                printf("|");
+            }
+            printf(" %d ",game.matriz[i][j]);
+            if(j == 2){
+                printf("|\n");
+            }
+        }
+    }
+}
+
+void print_pais(Game origem, Game destino){
+    int i, j, k, teste;
+    for(i = 1; i <= get_g(&destino); i++){
+        print_matrix(origem);
+        if(destino.pai[i] == 't'){
+            teste = find_pos(origem, 0, &j, &k);
+            origem.matriz[j][k] = origem.matriz[j - 1][k];
+            origem.matriz[j - 1][k] = 0;
+        } else if(destino.pai[i] == 'r'){
+            teste = find_pos(origem, 0, &j, &k);
+            origem.matriz[j][k] = origem.matriz[j][k + 1];
+            origem.matriz[j][k + 1] = 0;
+        } else if(destino.pai[i] == 'd'){
+            teste = find_pos(origem, 0, &j, &k);
+            origem.matriz[j][k] = origem.matriz[j + 1][k];
+            origem.matriz[j + 1][k] = 0;
+        }else if(destino.pai[i] == 'l'){
+            teste = find_pos(origem, 0, &j, &k);
+            origem.matriz[j][k] = origem.matriz[j][k - 1];
+            origem.matriz[j][k - 1] = 0;
+        }
+    }
+    print_matrix(origem);
 }

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #ifndef LISTA_ENCADEADA_H_INCLUDED
 #define LISTA_ENCADEADA_H_INCLUDED
@@ -130,14 +131,14 @@ int list_insert_sorted(List *li, Game game){
         list_push_front(li, game);
         return SUCCESS;
     }
-    List_node *aux, *a;   
+    List_node *aux, *a;
     a = (List_node *)malloc(sizeof(List_node));
     aux = li->head;
 
     if(a == NULL){
         return OUT_OF_MEMORY;
     }
-    
+
     a->data = game;
 
     while(aux != NULL){
@@ -166,9 +167,6 @@ int list_find(List *li, Game game){
    List_node *aux;
    aux = li->head;
    while(aux->next != NULL){
-        if((game.h + game.g) < (aux->next->data.h + aux->next->data.g)){
-            return 0;
-        }
         if(compara_matriz(aux->data, game)){                        /*funcao compara matriz aqui*/
             return 1;
         }

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #ifndef LISTA_ENCADEADA_H_INCLUDED
 #define LISTA_ENCADEADA_H_INCLUDED
@@ -31,31 +32,21 @@
 
 int main(int argc, char const *argv[])
 {
-    Game matriz1, matriz2;
-    int teste, i, j, k = 1;
+    Game matriz, matriz2;
+    int teste, i, j, heuristica;
 
-	matriz1.matriz [0][0] = 1;
-	matriz1.matriz [0][1] = 2;
-	matriz1.matriz [0][2] = 3;
-	matriz1.matriz [1][0] = 4;
-	matriz1.matriz [1][1] = 5;
-	matriz1.matriz [1][2] = 6;
-	matriz1.matriz [2][0] = 7;
-	matriz1.matriz [2][1] = 8;
-	matriz1.matriz [2][2] = 0;
-	/*
+    printf("Informe a Matriz origem: \n");
 	for(i = 0; i < 3; i++)
 	{
 		for(j = 0; j < 3; j++)
 		{
-			matriz1.matriz[i][j]=k;
-			k++;
-			if(i == 2 && j == 2){
-                matriz1.matriz[i][j]=0;
-			}
+			printf("\nValor %d %d: ", i, j);
+			scanf("%d", &matriz.matriz[i][j]);
 		}
 	}
-*/
+
+	printf("\nInforme a Matriz destino: \n");
+
 	for(i = 0; i < 3; i++)
 	{
 		for(j = 0; j < 3; j++)
@@ -65,7 +56,10 @@ int main(int argc, char const *argv[])
 		}
 	}
 
-	teste = a_star(matriz2, matriz1, 1);
+    printf("\nInforme a Heuristica(0 - Basica ou 1 - Manhattan): \n");
+    scanf("%d", &heuristica);
+
+	teste = a_star(matriz, matriz2, heuristica);
 
 	if(teste == SUCCESS){
         printf("\nSolucao encontrada!!");

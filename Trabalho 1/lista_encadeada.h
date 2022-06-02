@@ -6,6 +6,7 @@
 
 struct game{
     int matriz[3][3], g, h;
+    char pai[100];
 };
 
 typedef struct list List;

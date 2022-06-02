@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #ifndef LISTA_ENCADEADA_H_INCLUDED
 #define LISTA_ENCADEADA_H_INCLUDED
@@ -66,24 +67,20 @@ int a_star(Game origem, Game destino, int tipo_heuristica){
         }
         if(compara_matriz(game1, destino)){
             printf("\nG: %d - H: %d", get_g(&game1), get_h(&game1));
+            print_pais(origem, game1);
             list_free(open);
             list_free(closed);
             return SUCCESS;
         }
 
         if(!(list_find(closed, game1))){
-                teste = list_insert_sorted(closed, game1);
+                teste = list_push_front(closed, game1);
 
                 teste = arround(game1, &top, &right, &down, &left);
 
                 if(top){
-                    printf("\ntop\n");
                     game2 = game1;
                     teste = find_pos(game2, 0, &i, &j);
-                    if(!teste){
-                      printf("\nValor 0 faltando!");
-                      return 0;
-                    };
                     game2.matriz[i][j] = game2.matriz[i - 1][j];
                     game2.matriz[i - 1][j] = 0;
                     aux = get_g(&game2);
@@ -94,17 +91,13 @@ int a_star(Game origem, Game destino, int tipo_heuristica){
                     else{
                         teste = basica(&game2, destino);
                     }
+                    set_char(&game2, 't');
                     teste = list_insert_sorted(open, game2);
                 }
 
                 if(right){
-                    printf("\nright\n");
                     game2 = game1;
                     teste = find_pos(game2, 0, &i, &j);
-                    if(!teste){
-                      printf("\nValor 0 faltando!");
-                      return 0;
-                    };
                     game2.matriz[i][j] = game2.matriz[i][j+1];
                     game2.matriz[i][j+1] = 0;
                     aux = get_g(&game2);
@@ -115,17 +108,13 @@ int a_star(Game origem, Game destino, int tipo_heuristica){
                     else{
                         teste = basica(&game2, destino);
                     }
+                    set_char(&game2, 'r');
                     teste = list_insert_sorted(open, game2);
                 }
 
                 if(down){
-                    printf("\ndown\n");
                     game2 = game1;
                     teste = find_pos(game2, 0, &i, &j);
-                    if(!teste){
-                      printf("\nValor 0 faltando!");
-                      return 0;
-                    };
                     game2.matriz[i][j] = game2.matriz[i+1][j];
                     game2.matriz[i+1][j] = 0;
                     aux = get_g(&game2);
@@ -136,17 +125,13 @@ int a_star(Game origem, Game destino, int tipo_heuristica){
                     else{
                         teste = basica(&game2, destino);
                     }
+                    set_char(&game2, 'd');
                     teste = list_insert_sorted(open, game2);
                 }
 
                 if(left){
-                    printf("\nleft\n");
                     game2 = game1;
                     teste = find_pos(game2, 0, &i, &j);
-                    if(!teste){
-                      printf("\nValor 0 faltando!");
-                      return 0;
-                    };
                     game2.matriz[i][j] = game2.matriz[i][j-1];
                     game2.matriz[i][j-1] = 0;
                     aux = get_g(&game2);
@@ -157,6 +142,7 @@ int a_star(Game origem, Game destino, int tipo_heuristica){
                     else{
                         teste = basica(&game2, destino);
                     }
+                    set_char(&game2, 'l');
                     teste = list_insert_sorted(open, game2);
                 }
 
@@ -164,7 +150,6 @@ int a_star(Game origem, Game destino, int tipo_heuristica){
 
 
         printf("\n\n tamanho: %d                                   tamanho: %d", list_size(open), list_size(closed));
-        printf("\nt = %d - r = %d - d = %d - l = %d", top, right, down, left);
     }
 
     list_free(open);
