@@ -15,7 +15,7 @@
 
 #endif // FUNCOES_AUX_INCLUDED
 int maior(int num1, int num2){
-    int diferenca, maior, menor;
+    int maior, menor;
     if(num1 > num2){
         maior = num1;
         menor = num2;
@@ -24,8 +24,7 @@ int maior(int num1, int num2){
         maior = num2;
         menor = num1;
     }
-    diferenca = maior - menor;
-    return diferenca;
+    return maior-menor;
 }
 
 int compara_matriz(Game matriz1, Game matriz2){
