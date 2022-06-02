@@ -34,6 +34,16 @@ int main(int argc, char const *argv[])
     Game matriz1, matriz2;
     int teste, i, j, k = 1;
 
+	matriz1.matriz [0][0] = 1;
+	matriz1.matriz [0][1] = 2;
+	matriz1.matriz [0][2] = 3;
+	matriz1.matriz [1][0] = 4;
+	matriz1.matriz [1][1] = 5;
+	matriz1.matriz [1][2] = 6;
+	matriz1.matriz [2][0] = 7;
+	matriz1.matriz [2][1] = 8;
+	matriz1.matriz [2][2] = 0;
+	/*
 	for(i = 0; i < 3; i++)
 	{
 		for(j = 0; j < 3; j++)
@@ -45,7 +55,7 @@ int main(int argc, char const *argv[])
 			}
 		}
 	}
-
+*/
 	for(i = 0; i < 3; i++)
 	{
 		for(j = 0; j < 3; j++)
