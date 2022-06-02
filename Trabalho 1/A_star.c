@@ -54,7 +54,7 @@ int a_star(Game origem, Game destino, int tipo_heuristica){
     teste = list_insert_sorted(open, origem);
 
     if(teste == OUT_OF_MEMORY){
-        printf("\nLista n„o encontrada!");
+        printf("\nLista n√£o encontrada!");
         return 0;
     }
 
@@ -166,23 +166,6 @@ int a_star(Game origem, Game destino, int tipo_heuristica){
         printf("\n\n tamanho: %d                                   tamanho: %d", list_size(open), list_size(closed));
         printf("\nt = %d - r = %d - d = %d - l = %d", top, right, down, left);
     }
-
-    /*teste = list_push_front(open, origem);
-    teste = list_push_front(closed, destino);
-
-    printf("\nopen: %d\n", list_size(open));
-    printf("\nclosed: %d\n", list_size(closed));
-    teste = transfer_list(open, closed);
-    printf("\nopen: %d\n", list_size(open));
-    printf("\nclosed: %d\n", list_size(closed));*/
-
-    /*while(list_size(open)){
-        printf("\nTem algo\n");
-        teste = list_pop_front(open);
-    }
-    printf("\nNao tem algo\n");*/
-
-
 
     list_free(open);
     list_free(closed);
