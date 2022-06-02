@@ -47,10 +47,11 @@ List* list_create(){
 }
 
 int list_free(List *li){
-    List_node *aux, *aux2;
+
     if(li == NULL){
         return OUT_OF_MEMORY;
     }
+    List_node *aux, *aux2;
     aux = li->head;
     while(aux != NULL){
         aux2 = aux->next;
@@ -62,10 +63,11 @@ int list_free(List *li){
 }
 
 int list_push_front(List *li, Game game){
-    List_node *a;
+
     if(li == NULL){
         return OUT_OF_MEMORY;
     }
+    List_node *a;
     a = (List_node *)malloc(sizeof(List_node));
     if(a == NULL){
         return OUT_OF_MEMORY;
@@ -96,13 +98,13 @@ int list_size(List *li){
 }
 
 int list_pop_front(List *li){
-    List_node *aux;
     if(li == NULL){
         return OUT_OF_MEMORY;
     }
     if(li->head == NULL){
         return INVALID_NULL_POINTER;
     }
+    List_node *aux;
     aux = li->head->next;
     free(li->head);
     li->head = aux;
@@ -121,22 +123,21 @@ int list_front(List *li, Game *game){
 }
 
 int list_insert_sorted(List *li, Game game){
-    List_node *aux, *a;
-    int back;
     if(li == NULL){
         return OUT_OF_MEMORY;
     }
-    back = list_size(li);
-    aux = li->head;
-    if(back == 0 || (game.h + game.g) < (aux->data.h + aux->data.g)){
+        if(list_size (li) == 0 || (game.h + game.g) < (li->head->data.h + li->head->data.g)){
         list_push_front(li, game);
         return SUCCESS;
     }
-
+    List_node *aux, *a;   
     a = (List_node *)malloc(sizeof(List_node));
+    aux = li->head;
+
     if(a == NULL){
         return OUT_OF_MEMORY;
     }
+    
     a->data = game;
 
     while(aux != NULL){
@@ -155,13 +156,14 @@ int list_insert_sorted(List *li, Game game){
 }
 
 int list_find(List *li, Game game){
-   List_node *aux;
+
    if(li == NULL){
         return OUT_OF_MEMORY;
     }
    if(li->head == NULL){
         return 0;
     }
+   List_node *aux;
    aux = li->head;
    while(aux->next != NULL){
         if((game.h + game.g) < (aux->next->data.h + aux->next->data.g)){
