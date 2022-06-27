@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from funcoes import *
 
 class velha:
 	def __init__(self):
