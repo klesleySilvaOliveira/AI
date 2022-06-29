@@ -90,9 +90,9 @@ def maxi(tabuleiro):
 			estado = copy.deepcopy(tabuleiro)
 			if estado.matrix[x][y] == " ":
 				estado.matrix[x][y] = "X"
-				minimo = mini(estado)[1]
-				if minimo > melhor:
-					melhor = minimo
+				maximo = mini(estado)[1]
+				if maximo > melhor:
+					melhor = maximo
 					melhor_movimento = copy.deepcopy(estado)
 	
 	return [melhor_movimento, melhor]
@@ -116,9 +116,9 @@ def mini(tabuleiro):
 			estado = copy.deepcopy(tabuleiro)
 			if estado.matrix[x][y] == " ":
 				estado.matrix[x][y] = "O"
-				maximo = maxi(estado)[1]
-				if maximo < melhor:
-					melhor = maximo
+				minimo = maxi(estado)[1]
+				if minimo < melhor:
+					melhor = minimo
 					melhor_movimento = copy.deepcopy(estado)
 	
 	return [melhor_movimento, melhor]
@@ -161,5 +161,102 @@ def minimax(tabuleiro, player1, player2): #player = 1 for player 0 for CPU
 				add_velha(tabuleiro, "O", x, y)
 			else:
 				tabuleiro = mini(tabuleiro)[0]
+
+	return tabuleiro
+
+def maxi_alfa(tabuleiro):
+	termino = verificar_termino(tabuleiro)
+
+	if termino == "x" or termino == "X":
+		return [tabuleiro, 1]
+	elif termino == "o" or termino == "O":
+		return [tabuleiro, -1]
+	elif termino == "empate":
+		return [tabuleiro, 0]
+
+	#melhor = -inf
+	melhor = -10
+	melhor_movimento = copy.deepcopy(tabuleiro)
+
+	for x in range(0, 3, 1):
+		for y in range(0, 3, 1):
+			estado = copy.deepcopy(tabuleiro)
+			if estado.matrix[x][y] == " ":
+				estado.matrix[x][y] = "X"
+				maximo = mini_beta(estado)[1]
+				if maximo > melhor:
+					melhor = maximo
+					melhor_movimento = copy.deepcopy(estado)
+				if maximo == 1:
+					return [melhor_movimento, melhor]
+	
+	return [melhor_movimento, melhor]
+
+def mini_beta(tabuleiro):
+	termino = verificar_termino(tabuleiro)
+
+	if termino == "x" or termino == "X":
+		return [tabuleiro, 1]
+	elif termino == "o" or termino == "O":
+		return [tabuleiro, -1]
+	elif termino == "empate":
+		return [tabuleiro, 0]
+
+	#melhor = inf
+	melhor = 10
+	melhor_movimento = copy.deepcopy(tabuleiro)
+
+	for x in range(0, 3, 1):
+		for y in range(0, 3, 1):
+			estado = copy.deepcopy(tabuleiro)
+			if estado.matrix[x][y] == " ":
+				estado.matrix[x][y] = "O"
+				minimo = maxi_alfa(estado)[1]
+				if minimo < melhor:
+					melhor = minimo
+					melhor_movimento = copy.deepcopy(estado)
+				if minimo == -1:
+					return [melhor_movimento, melhor]
+	
+	return [melhor_movimento, melhor]
+
+def minimax_ab(tabuleiro, player1, player2): #player = 1 for player 0 for CPU
+	while verifica_vazio(tabuleiro):
+
+		termino = verificar_termino(tabuleiro)
+
+		if termino == "x" or termino == "X":
+			return tabuleiro
+		elif termino == "o" or termino == "O":
+			return tabuleiro
+		elif termino == "empate":
+			return tabuleiro
+
+		vez = verifica_vez(tabuleiro)
+		printar_tabuleiro(tabuleiro)
+		print("VEZ DO " + vez)
+
+		if vez == "X":
+			if player1:
+				x = -1
+				y = -1
+				while x < 0 or y < 0 or x > 2 or y > 2:
+					x, y = map(int, input("Enter two values: ").split())
+					if not confere_validade(tabuleiro, x, y):
+						x = -1
+				add_velha(tabuleiro, "X", x, y)
+			else:
+				tabuleiro = maxi_alfa(tabuleiro)[0]
+		elif vez == "O":
+			if player2:
+				x = -1
+				y = -1
+				while x < 0 or y < 0 or x > 2 or y > 2:
+					x, y = map(int, input("Enter two values: ").split())
+					if not confere_validade(tabuleiro, x, y):
+						x = -1
+				add_velha(tabuleiro, "O", x, y)
+			else:
+				tabuleiro = mini_beta(tabuleiro)[0]
 
 	return tabuleiro
